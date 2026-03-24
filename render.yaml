@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: pos-api
+    env: node
+    region: Oregon
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: PORT
+        value: "3001"
+
+  - type: web
+    name: pos-app
+    env: static
+    buildCommand: npm run build
+    staticPublishFolder: dist
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: VITE_API_URL
+        value: https://pos-api.onrender.com/api
